@@ -14,6 +14,8 @@ import socialMediaAutomation from './socialmediaautomation';
 import productPage from './productPage';
 import pricingPage from './pricingPage';
 import resourcesPage from './resourcesPage';
+import privacyPolicy from './privacyPolicy';
+import termsOfService from './termsOfService';
 
 export const schemaTypes = [
   hero,
@@ -31,5 +33,7 @@ export const schemaTypes = [
   socialMediaAutomation,
   productPage,
   pricingPage,
-  resourcesPage
+  resourcesPage,
+  privacyPolicy,
+  termsOfService
 ];

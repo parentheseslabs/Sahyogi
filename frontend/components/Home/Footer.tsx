@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import PolicyModal from '../Modal/PolicyModal';
 
 const footerOuter: React.CSSProperties = {
   width: '100%',
@@ -102,6 +103,17 @@ const bottomBar: React.CSSProperties = {
   textAlign: 'center',
 };
 
+const policyLinkStyle: React.CSSProperties = {
+  color: '#718096',
+  textDecoration: 'none',
+  transition: 'color 0.2s ease',
+  fontSize: 'clamp(0.8rem, 2vw, 0.9rem)',
+  cursor: 'pointer',
+  background: 'none',
+  border: 'none',
+  padding: 0
+};
+
 const quickLinks = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/#about' },
@@ -124,6 +136,9 @@ const socials = [
 export default function Footer() {
   const [hovered, setHovered] = React.useState<number | null>(null);
   const [socialHovered, setSocialHovered] = React.useState<number | null>(null);
+  const [privacyModalOpen, setPrivacyModalOpen] = React.useState(false);
+  const [termsModalOpen, setTermsModalOpen] = React.useState(false);
+  const [policyHovered, setPolicyHovered] = React.useState<string | null>(null);
   
   return (
     <footer style={footerOuter}>
@@ -179,10 +194,42 @@ export default function Footer() {
       <div style={bottomBar}>
         <span>© 2025 Sahyogi.io. All rights reserved.</span>
         <div style={{ display: 'flex', gap: 'clamp(1rem, 3vw, 1.5rem)', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <a href="#" style={{ color: '#718096', textDecoration: 'none', transition: 'color 0.2s ease', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)' }}>Privacy Policy</a>
-          <a href="#" style={{ color: '#718096', textDecoration: 'none', transition: 'color 0.2s ease', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)' }}>Terms of Service</a>
+          <button 
+            onClick={() => setPrivacyModalOpen(true)}
+            style={{
+              ...policyLinkStyle,
+              color: policyHovered === 'privacy' ? '#1a355e' : '#718096'
+            }}
+            onMouseEnter={() => setPolicyHovered('privacy')}
+            onMouseLeave={() => setPolicyHovered(null)}
+          >
+            Privacy Policy
+          </button>
+          <button 
+            onClick={() => setTermsModalOpen(true)}
+            style={{
+              ...policyLinkStyle,
+              color: policyHovered === 'terms' ? '#1a355e' : '#718096'
+            }}
+            onMouseEnter={() => setPolicyHovered('terms')}
+            onMouseLeave={() => setPolicyHovered(null)}
+          >
+            Terms of Service
+          </button>
         </div>
       </div>
+
+      {/* Policy Modals */}
+      <PolicyModal 
+        type="privacy" 
+        isOpen={privacyModalOpen} 
+        onClose={() => setPrivacyModalOpen(false)} 
+      />
+      <PolicyModal 
+        type="terms" 
+        isOpen={termsModalOpen} 
+        onClose={() => setTermsModalOpen(false)} 
+      />
     </footer>
   );
 } 
