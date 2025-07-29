@@ -1,0 +1,250 @@
+export const HERO_QUERY = `*[_type == "hero"][0]{
+  headingLine1,
+  headingLine2,
+  subheading,
+  primaryCtaText,
+  primaryCtaLink,
+  secondaryCtaText,
+  secondaryCtaLink,
+  image
+}`;
+
+export const VALUE_PROPS_QUERY = `*[_type == "valueProp"] | order(_createdAt asc) {
+  _id,
+  icon,
+  title,
+  description
+}`;
+
+export const WHY_SAHYOGI_QUERY = `*[_type == "whySahyogi"][0]{
+  cardCount,
+  cards[]-> {
+    _id,
+    icon,
+    title,
+    description
+  }
+}`;
+
+export const PRODUCT_SPOTLIGHT_QUERY = `*[_type == "productSpotlight"][0]{
+  headline,
+  copy,
+  carouselImages[]{
+    asset->{
+      _id,
+      url
+    }
+  }
+}`;
+
+export const CORE_SERVICES_QUERY = `*[_type == "coreServicesOverview"][0]{
+  cards[]-> {
+    _id,
+    title,
+    benefit,
+    link,
+    description,
+    overlayText
+  }
+}`;
+
+export const TESTIMONIALS_QUERY = `*[_type == "testimonial"] | order(_createdAt asc) {
+  _id,
+  name,
+  quote,
+  role,
+  photo {
+    asset->{_id, url}
+  }
+}`;
+
+export const PARTNERS_QUERY = `*[_type == "partner"] | order(_createdAt asc) {
+  _id,
+  name,
+  logo{
+    asset->{_id, url}
+  },
+  link
+}`;
+
+export const CUSTOMER_SUPPORT_AUTOMATION_QUERY = `*[_type == "customerSupportAutomation"][0]{
+  title,
+  subtitle,
+  challenge{
+    icon,
+    text
+  },
+  solution{
+    icon,
+    text
+  },
+  features[]{
+    icon,
+    text
+  },
+  stats[]{
+    icon,
+    label,
+    value,
+    color
+  },
+  improvement{
+    icon,
+    text
+  },
+  ctaButtons[]{
+    text,
+    link,
+    type
+  },
+  additionalContent{
+    description,
+    benefits,
+    useCases[]{
+      title,
+      description
+    },
+    testimonials[]->
+  },
+  seo{
+    metaTitle,
+    metaDescription,
+    keywords
+  }
+    
+}`; 
+export const BUSINESS_PROCESS_AUTOMATION_QUERY = `*[_type == "businessprocessautomation"][0]{
+  title,
+  subtitle,
+  features[]{
+    icon,
+    text
+  },
+  challenge{
+    icon,
+    text
+  },
+  solution{
+    icon,
+    text
+  },
+  stats[]{
+    icon,
+    label,
+    value,
+    color
+  },
+  improvement{
+    icon,
+    text
+  },
+  ctaButtons[]{
+    text,
+    link,
+    type
+  },
+  additionalContent{
+    description,
+    benefits,
+    useCases[]{
+      title,
+      description
+    },
+    testimonials[]->
+  },
+  seo{
+    metaTitle,
+    metaDescription,
+    keywords
+  }
+}`;
+export const LEAD_GENERATION_OUT_REACH_QUERY = `*[_type == "leadGenerationPutReach"][0]{
+  title,
+  subtitle,
+  challenge{
+    icon,
+    text
+  },
+  solution{
+    icon,
+    text
+  },
+  features[]{
+    icon,
+    text
+  },
+  stats[]{
+    icon,
+    label,
+    value,
+    color
+  },
+  improvement{
+    icon,
+    text
+  },
+  ctaButtons[]{
+    text,
+    link,
+    type
+  },
+  additionalContent{
+    description,
+    benefits,
+    useCases[]{
+      title,
+      description
+    },
+    testimonials[]->
+  },
+  seo{
+    metaTitle,
+    metaDescription,
+    keywords
+  }
+}`;
+export const SOCIAL_MEDIA_AUTOMATION_QUERY = `*[_type == "socialMediaAutomation"][0]{
+  title,
+  subtitle,
+  challenge{
+    icon,
+    text
+  },
+  solution{
+    icon,
+    text
+  },
+  features[]{
+    icon,
+    text
+  },
+  stats[]{
+    icon,
+    label,
+    value,
+    color
+  },
+  improvement{
+    icon,
+    text
+  },
+  ctaButtons[]{
+    text,
+    link,
+    type
+  },
+  additionalContent{
+    description,
+    benefits,
+    useCases[]{
+      title,
+      description
+    },
+    testimonials[]->
+  },
+  seo{
+    metaTitle,
+    metaDescription,
+    keywords
+  }
+}`;
