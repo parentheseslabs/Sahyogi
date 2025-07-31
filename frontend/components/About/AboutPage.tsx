@@ -1,12 +1,22 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { client } from '../../lib/sanity';
+import imageUrlBuilder from '@sanity/image-url';
+
+const builder = imageUrlBuilder(client);
+function urlFor(source: any) {
+  return builder.image(source).width(40).height(40).fit('max').url();
+}
 
 const aboutPageQuery = `*[_type == "aboutPage"][0]{
+  missionIcon,
   mission,
+  visionIcon,
   vision,
+  whoWeAreIcon,
   whoWeAre,
   whoWeAreBlock,
+  ourGoalIcon,
   ourGoal,
   stats,
   metaPartner{logo, title, description}
@@ -16,7 +26,7 @@ const sectionStyle: React.CSSProperties = {
   width: '100%',
   maxWidth: '1200px',
   margin: '0 auto',
-  padding: '4rem 2rem',
+  padding: '1rem 2rem 4rem 2rem',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -26,8 +36,8 @@ const sectionStyle: React.CSSProperties = {
 };
 
 const aboutHeadingStyle: React.CSSProperties = {
-  fontSize: '3rem',
-  fontWeight: 900,
+  fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+  fontWeight: 700,
   textAlign: 'center',
   marginBottom: '1rem',
   color: '#1a355e', // Solid blue
@@ -136,9 +146,9 @@ const whoWeAreBlockStyle: React.CSSProperties = {
 };
 
 const ourGoalHeading: React.CSSProperties = {
-  fontSize: 'clamp(2.2rem, 4vw, 3rem)',
+  fontSize: 'clamp(2.5rem, 4vw, 3.5rem)',
   fontWeight: 800,
-  color: '#1a355e',
+  color: '#ffffffff',
   letterSpacing: '-0.02em',
   marginBottom: '2rem',
   textAlign: 'left',
@@ -154,7 +164,7 @@ const ourGoalIcon: React.CSSProperties = {
 };
 
 const ourGoalBlockStyle: React.CSSProperties = {
-  color: '#475569',
+  color: '#ffffffff',
   fontSize: 'clamp(1.1rem, 2vw, 1.25rem)',
   lineHeight: 1.8,
   fontWeight: 400,
@@ -187,16 +197,16 @@ const whoWeAreCardBefore: React.CSSProperties = {
   left: '0',
   right: '0',
   height: '4px',
-  background: 'linear-gradient(90deg, #6ee7f7 0%, #3B82F6 50%, #6ee7f7 100%)',
+  //background: 'linear-gradient(90deg, #6ee7f7 0%, #3B82F6 50%, #6ee7f7 100%)',
   borderTopLeftRadius: '24px',
   borderTopRightRadius: '24px',
 };
 
 const ourGoalCardStyle: React.CSSProperties = {
-  background: 'linear-gradient(135deg, #f8fafc 0%, #fffef9 50%, #f1f5f9 100%)',
+  background: 'linear-gradient(135deg, #1a355e 0%, #0f1e2e 100%)',
   borderRadius: '24px',
   boxShadow: '0 20px 60px 0 rgba(26, 53, 94, 0.15)',
-  border: '2px solid #6ee7f7',
+  //border: '2px solid #6ee7f7',
   padding: '3rem 2.5rem',
   margin: '2rem auto 0 auto',
   maxWidth: '100%',
@@ -230,12 +240,40 @@ export default function AboutPage() {
       {/* Mission & Vision Cards */}
       <div style={cardsRowStyle}>
         <div style={cardStyle}>
-          <div style={cardIconStyle}>🎯</div>
+          <div style={cardIconStyle}>
+            {about.missionIcon ? (
+              <img 
+                src={urlFor(about.missionIcon)} 
+                alt="Mission Icon" 
+                style={{ 
+                  width: '35px', 
+                  height: '35px', 
+                  objectFit: 'contain'
+                }}
+              />
+            ) : (
+              '🎯'
+            )}
+          </div>
           <div style={cardTitleStyle}>Our Mission</div>
           <div style={cardDescStyle}>{about.mission}</div>
         </div>
         <div style={cardStyle}>
-          <div style={cardIconStyle}>👁️</div>
+          <div style={cardIconStyle}>
+            {about.visionIcon ? (
+              <img 
+                src={urlFor(about.visionIcon)} 
+                alt="Vision Icon" 
+                style={{ 
+                  width: '35px', 
+                  height: '35px', 
+                  objectFit: 'contain'
+                }}
+              />
+            ) : (
+              '👁️'
+            )}
+          </div>
           <div style={cardTitleStyle}>Our Vision</div>
           <div style={cardDescStyle}>{about.vision}</div>
         </div>
@@ -244,7 +282,21 @@ export default function AboutPage() {
       <div style={whoWeAreCardStyle}>
         <div style={whoWeAreCardBefore}></div>
         <div style={whoWeAreHeading}>
-          <span style={whoWeAreIcon}>👥</span>
+          <span style={whoWeAreIcon}>
+            {about.whoWeAreIcon ? (
+              <img 
+                src={urlFor(about.whoWeAreIcon)} 
+                alt="Who We Are Icon" 
+                style={{ 
+                  width: '48px', 
+                  height: '48px', 
+                  objectFit: 'contain'
+                }}
+              />
+            ) : (
+              '👥'
+            )}
+          </span>
           Who <span style={whoWeAreHighlight}>We Are</span>
         </div>
         <div style={whoWeAreBlockStyle}>{about.whoWeAreBlock}</div>
@@ -253,7 +305,21 @@ export default function AboutPage() {
       {/* Our Goal Card - Enhanced */}
       <div style={ourGoalCardStyle}>
         <div style={ourGoalHeading}>
-          <span style={ourGoalIcon}>🚀</span>
+          <span style={ourGoalIcon}>
+            {about.ourGoalIcon ? (
+              <img 
+                src={urlFor(about.ourGoalIcon)} 
+                alt="Our Goal Icon" 
+                style={{ 
+                  width: '40px', 
+                  height: '40px', 
+                  objectFit: 'contain'
+                }}
+              />
+            ) : (
+              '🚀'
+            )}
+          </span>
           Our Goal
         </div>
         <div style={ourGoalBlockStyle}>{about.ourGoal}</div>

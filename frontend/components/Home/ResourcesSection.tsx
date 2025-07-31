@@ -112,7 +112,7 @@ const ResourcesSection: React.FC = () => {
         {/* Section Header */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <h2 style={{ 
-            fontSize: '3rem', 
+            fontSize: 'clamp(2.5rem, 5vw, 4rem)', 
             fontWeight: 800, 
             color: '#1a355e',
             marginBottom: '1.5rem'

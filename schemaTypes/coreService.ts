@@ -4,6 +4,16 @@ export default {
   type: 'document',
   fields: [
     {
+      name: 'icon',
+      title: 'Service Icon',
+      type: 'image',
+      options: { 
+        hotspot: true,
+        accept: 'image/*'
+      },
+      description: 'Upload an icon for this service (SVG, PNG, or JPG recommended)'
+    },
+    {
       name: 'title',
       title: 'Title',
       type: 'string',

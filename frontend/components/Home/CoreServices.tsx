@@ -4,6 +4,12 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CORE_SERVICES_QUERY } from '../../lib/queries';
 import { client } from '../../lib/sanity';
+import imageUrlBuilder from '@sanity/image-url';
+
+const builder = imageUrlBuilder(client);
+function urlFor(source: any) {
+  return builder.image(source).width(60).height(60).fit('max').url();
+}
 
 const sectionStyle: React.CSSProperties = {
   width: '100%',
@@ -18,8 +24,8 @@ const sectionStyle: React.CSSProperties = {
 };
 
 const titleStyle: React.CSSProperties = {
-  fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-  fontWeight: 800,
+  fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+  fontWeight: 700,
   marginBottom: 'clamp(3rem, 5vw, 4rem)',
   color: '#ffffff',
   letterSpacing: '-0.025em',
@@ -51,6 +57,8 @@ const cardStyle: React.CSSProperties = {
   position: 'relative',
   overflow: 'hidden',
   minHeight: 'clamp(280px, 30vw, 320px)',
+  display: 'flex',
+  flexDirection: 'column',
 };
 
 const cardHoverStyle: React.CSSProperties = {
@@ -90,6 +98,7 @@ const cardDescStyle: React.CSSProperties = {
   fontSize: 'clamp(0.9rem, 2vw, 1rem)',
   lineHeight: 1.6,
   marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+  flex: 1,
 };
 
 const cardLinkStyle: React.CSSProperties = {
@@ -109,6 +118,7 @@ const cardLinkStyle: React.CSSProperties = {
   borderColor: 'rgba(255, 255, 255, 0.2)',
   backdropFilter: 'blur(10px)',
   justifyContent: 'center',
+  marginTop: 'auto',
 };
 
 const cardOverlayStyle: React.CSSProperties = {
@@ -209,7 +219,19 @@ export default function CoreServices() {
             onClick={() => handleCardClick(card.title, card.link)}
           >
             <div style={cardIconStyle}>
-              {serviceIcons[idx] || '⚡'}
+              {card.icon ? (
+                <img 
+                  src={urlFor(card.icon)} 
+                  alt={card.title} 
+                  style={{ 
+                    width: '80%', 
+                    height: '80%', 
+                    objectFit: 'contain'
+                  }}
+                />
+              ) : (
+                serviceIcons[idx] || '⚡'
+              )}
             </div>
             <div style={cardTitleStyle}>{card.title}</div>
             <div style={cardDescStyle}>
@@ -221,7 +243,19 @@ export default function CoreServices() {
             
             <div style={getOverlayStyle(card._id)}>
               <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>
-                {serviceIcons[idx] || '⚡'}
+                {card.icon ? (
+                  <img 
+                    src={urlFor(card.icon)} 
+                    alt={card.title} 
+                    style={{ 
+                      width: '3rem', 
+                      height: '3rem', 
+                      objectFit: 'contain'
+                    }}
+                  />
+                ) : (
+                  serviceIcons[idx] || '⚡'
+                )}
               </div>
               <div style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '1rem' }}>
                 {card.overlayText}

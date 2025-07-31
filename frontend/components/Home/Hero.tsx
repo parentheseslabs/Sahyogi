@@ -35,16 +35,16 @@ const leftCol: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  gap: 'clamp(1.5rem, 3vw, 2rem)',
+  gap: 'clamp(0.8rem, 1.5vw, 1.2rem)',
   textAlign: 'left',
 };
 
 const heroTitleStyle: React.CSSProperties = {
-  fontSize: 'clamp(3rem, 6vw, 5rem)',
-  fontWeight: 800,
+  fontSize: 'clamp(2.2rem, 4.5vw, 3.5rem)',
+  fontWeight: 700,
   color: '#1a355e',
-  lineHeight: 1.1,
-  marginBottom: 'clamp(1rem, 2vw, 1.5rem)',
+  lineHeight: 1.15,
+  marginBottom: 'clamp(0.5rem, 1vw, 0.8rem)',
   textShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
   animation: 'fadeIn 1s ease-out',
 };
@@ -54,7 +54,7 @@ const subheadingStyle: React.CSSProperties = {
   color: '#64748b',
   lineHeight: 1.6,
   animation: 'fadeIn 1.2s ease-out',
-  marginBottom: 'clamp(2rem, 3vw, 3rem)',
+  marginBottom: 'clamp(1rem, 2vw, 1.5rem)',
   maxWidth: '600px',
   fontWeight: 400,
 };
@@ -62,7 +62,7 @@ const subheadingStyle: React.CSSProperties = {
 const statsRow: React.CSSProperties = {
   display: 'flex',
   gap: 'clamp(1rem, 3vw, 2rem)',
-  marginBottom: 'clamp(2rem, 3vw, 3rem)',
+  marginBottom: 'clamp(1rem, 2vw, 1.5rem)',
   animation: 'fadeIn 1.4s ease-out',
   flexWrap: 'wrap',
   justifyContent: 'flex-start',
@@ -101,7 +101,7 @@ const statLabel: React.CSSProperties = {
 const ctaRow: React.CSSProperties = {
   display: 'flex',
   gap: 'clamp(0.8rem, 2vw, 1rem)',
-  marginTop: 'clamp(1.5rem, 3vw, 2rem)',
+  marginTop: 'clamp(0.5rem, 1vw, 1rem)',
   alignItems: 'center',
   flexWrap: 'wrap',
   justifyContent: 'flex-start',

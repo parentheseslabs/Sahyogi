@@ -32,7 +32,7 @@ const containerStyle: React.CSSProperties = {
 
 const headerSectionStyle: React.CSSProperties = {
   textAlign: 'center',
-  maxWidth: '700px',
+  maxWidth: '900px',
 };
 
 const cardsGridStyle: React.CSSProperties = {
@@ -65,14 +65,14 @@ const headingStyle: React.CSSProperties = {
   fontWeight: 700,
   color: '#ffffff',
   lineHeight: 1.2,
-  marginBottom: '1rem',
+  marginBottom: '1.5rem',
 };
 
 const subHeadingStyle: React.CSSProperties = {
   ...standardBodyTextStyle,
   fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
   color: '#a0a0a0',
-  lineHeight: 1.6,
+  lineHeight: 1.5,
   marginBottom: '1rem',
 };
 
@@ -168,12 +168,11 @@ export default function WhySahyogi() {
         {/* Header Section */}
         <div style={headerSectionStyle}>
           <h2 style={headingStyle}>
-            Extraordinary growth starts with a plan.
+            Unlock Exponential Growth<br />Without the Growing Pains
           </h2>
           <p style={subHeadingStyle}>
-            Your path to thrive in 4 steps: From consultation to optimization, 
-            we guide your business through every stage of growth with proven strategies 
-            and expert support.
+            From plug-and-play launch to agent handoffs and full funnel automation,<br />
+            we support every step of your SME's journey with zero technical headaches and pricing built for scale.
           </p>
         </div>
         
@@ -208,4 +207,4 @@ export default function WhySahyogi() {
       </div>
     </section>
   );
-} 
+}

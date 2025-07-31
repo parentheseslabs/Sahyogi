@@ -102,17 +102,29 @@ const ProductPage: React.FC = () => {
     <div style={{ background: '#ffffffff', minHeight: '100vh' }}>
       {/* Hero Section */}
       <section style={{ 
-        padding: 'clamp(3rem, 6vw, 6rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 4vw, 4rem) clamp(1rem, 3vw, 2rem)', 
+        padding: 'clamp(3rem, 6vw, 4rem) clamp(1rem, 3vw, 2rem)', 
         textAlign: 'center',
         background:'#1a365e',
-        color: '#ffffffff'
+        color: '#ffffffff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
       }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+        <div style={{ 
+          maxWidth: '1000px', 
+          margin: '0 auto',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center'
+        }}>
           <h1 style={{ 
             ...standardHeadingStyle,
             color: '#ffffff',
             textAlign: 'center',
-            marginBottom: 'clamp(1rem, 2vw, 2rem)',
+            marginBottom: 'clamp(1rem, 2vw, 1.5rem)',
+            lineHeight: 1.2
           }}>
             {productData.headline}
           </h1>
@@ -121,8 +133,9 @@ const ProductPage: React.FC = () => {
             color: '#ffffff',
             opacity: 0.9,
             textAlign: 'center',
-            maxWidth: '800px',
-            margin: '0 auto clamp(2rem, 3vw, 3rem) auto'
+            maxWidth: '700px',
+            margin: '0 auto clamp(2rem, 3vw, 2.5rem) auto',
+            lineHeight: 1.6
           }}>
             {productData.productIntro}
           </p>
@@ -172,7 +185,10 @@ const ProductPage: React.FC = () => {
       <section style={{ padding: 'clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 2rem)', background: '#ffffff' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ 
-            ...standardSectionTitleStyle,
+            fontSize: '3rem',
+            fontWeight: 700,
+            color: '#1a355e',
+            textAlign: 'center',
             marginBottom: 'clamp(1rem, 2vw, 1.5rem)'
           }}>
             Interactive Demo
@@ -356,8 +372,11 @@ const ProductPage: React.FC = () => {
       <section style={{ padding: 'clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 2rem)', background: '#fffef9' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <h2 style={{ 
-            ...standardSectionTitleStyle,
-            marginBottom: 'clamp(2rem, 4vw, 4rem)'
+            fontSize: '3rem',
+            fontWeight: 700,
+            color: '#1a355e',
+            textAlign: 'center',
+            marginBottom: 'clamp(1rem, 2vw, 1.5rem)'
           }}>
             Key Features:
           </h2>

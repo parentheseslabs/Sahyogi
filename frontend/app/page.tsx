@@ -24,7 +24,6 @@ export default function Home() {
       {/* About Us section */}
       <section id="about" style={{ scrollMarginTop: '120px' }}>
         <div style={{ width: '100%', textAlign: 'center', margin: 'clamp(2rem, 4vw, 4rem) 0 clamp(1rem, 2vw, 2rem) 0' }}>
-          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)', fontWeight: 800, color: '#1a355e', letterSpacing: '-0.025em', marginBottom: 'clamp(1rem, 2vw, 2rem)' }}>About Us</h2>
         </div>
         <AboutPage />
       </section>
@@ -32,7 +31,6 @@ export default function Home() {
       {/* Product section */}
       <section id="product" style={{ scrollMarginTop: '120px' }}>
         <div style={{ width: '100%', textAlign: 'center', margin: 'clamp(2rem, 4vw, 4rem) 0 clamp(1rem, 2vw, 2rem) 0' }}>
-          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)', fontWeight: 800, color: '#1a355e', letterSpacing: '-0.025em', marginBottom: 'clamp(1rem, 2vw, 2rem)' }}>Product</h2>
         </div>
         <ProductPage />
       </section>

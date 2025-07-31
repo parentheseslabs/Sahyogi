@@ -15,16 +15,16 @@ const sectionStyle: React.CSSProperties = {
   width: '100%',
   maxWidth: '1200px',
   margin: '0 auto',
-  padding: 'clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 3rem)',
+  padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 2rem)',
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
-  gap: 'clamp(2rem, 5vw, 5rem)',
+  gap: 'clamp(1.5rem, 3vw, 3rem)',
   background: '#fffef9',
   boxShadow: '0 12px 40px 0 rgba(26, 53, 94, 0.08)',
   borderRadius: '24px',
   border: '1px solid rgba(226, 232, 240, 0.6)',
-  marginBottom: '4rem',
+  marginBottom: '2rem',
 };
 
 const leftCol: React.CSSProperties = {
@@ -32,13 +32,28 @@ const leftCol: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  gap: 'clamp(1rem, 3vw, 2rem)',
-  paddingRight: 'clamp(0rem, 2vw, 2rem)',
+  gap: 'clamp(0.5rem, 1vw, 0.8rem)',
+  paddingRight: '0',
 };
 
 const headlineStyle: React.CSSProperties = {
-  ...standardSectionTitleStyle,
+  fontSize: 'clamp(2rem, 4.5vw, 3rem)',
+  fontWeight: 700,
+  color: '#1a355e',
+  letterSpacing: '-0.025em',
   textAlign: 'left',
+  marginBottom: 'clamp(0.2rem, 0.5vw, 0.3rem)',
+  lineHeight: 1.2,
+};
+
+const subheadingStyle: React.CSSProperties = {
+  fontSize: 'clamp(1.2rem, 2.8vw, 1.8rem)',
+  fontWeight: 600,
+  color: '#2ec4f1',
+  letterSpacing: '-0.02em',
+  textAlign: 'left',
+  marginBottom: 'clamp(0.3rem, 0.6vw, 0.5rem)',
+  lineHeight: 1.3,
 };
 
 const copyStyle: React.CSSProperties = {
@@ -46,7 +61,7 @@ const copyStyle: React.CSSProperties = {
   fontWeight: 500,
   margin: 0,
   lineHeight: 1.7,
-  maxWidth: '90%',
+  maxWidth: '100%',
 };
 
 const carouselCol: React.CSSProperties = {
@@ -54,7 +69,7 @@ const carouselCol: React.CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  minHeight: 'clamp(250px, 60vw, 400px)',
+  minHeight: 'clamp(350px, 70vw, 500px)',
   position: 'relative',
   overflow: 'visible',
   width: '100%',
@@ -101,8 +116,8 @@ const rightNavStyle: React.CSSProperties = {
 const carouselContainer: React.CSSProperties = {
   position: 'relative',
   width: '100%',
-  maxWidth: 'clamp(280px, 90vw, 400px)',
-  height: 'clamp(200px, 60vw, 300px)',
+  maxWidth: 'clamp(350px, 95vw, 500px)',
+  height: 'clamp(280px, 70vw, 400px)',
   overflow: 'hidden',
   borderRadius: '20px',
   boxShadow: '0 20px 48px 0 rgba(26, 53, 94, 0.12)',
@@ -129,7 +144,7 @@ const headingStyle: React.CSSProperties = {
   color: '#1a355e',
   letterSpacing: '-0.025em',
   textAlign: 'center',
-  marginBottom: 'clamp(1rem, 3vw, 2rem)',
+  marginBottom: 'clamp(0.8rem, 2vw, 1.2rem)',
 };
 
 export default function ProductSpotlight() {
@@ -206,7 +221,6 @@ export default function ProductSpotlight() {
 
   return (
     <section style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: 'clamp(1rem, 3vw, 3rem) clamp(0.5rem, 2vw, 1rem)' }}>
-      <div style={headingStyle}>Product Spotlight</div>
       <div style={{
         ...sectionStyle,
         flexDirection: isMobile ? 'column' : 'row',
@@ -215,10 +229,16 @@ export default function ProductSpotlight() {
       }}>
         <div style={{
           ...leftCol,
-          paddingRight: isMobile ? '0' : 'clamp(0rem, 2vw, 2rem)'
+          paddingRight: isMobile ? '0' : '0'
         }}>
-          <div style={headlineStyle}>{data.headline}</div>
-          <div style={copyStyle}>{data.copy}</div>
+          <div style={headlineStyle}>Turn Conversations into Conversions.</div>
+          <div style={subheadingStyle}>
+            Run Your Business.<br />
+            Entirely on WhatsApp.
+          </div>
+          <div style={copyStyle}>
+            From customer acquisition to order fulfillment, manage your entire business workflow through WhatsApp with AI-powered automation that scales with your growth.
+          </div>
         </div>
         <div style={carouselCol}>
           {images.length > 0 ? (

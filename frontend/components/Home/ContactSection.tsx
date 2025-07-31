@@ -8,6 +8,12 @@ const ContactSection: React.FC = () => {
     phone: '',
     message: ''
   });
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -17,11 +23,48 @@ const ContactSection: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // You can add your form submission logic here
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Thank you! Your message has been sent successfully. We\'ll get back to you soon.'
+        });
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: ''
+        });
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: result.error || 'Something went wrong. Please try again.'
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Network error. Please check your connection and try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -37,15 +80,19 @@ const ContactSection: React.FC = () => {
           50% { opacity: 0.06; }
         }
         
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
         .contact-section {
           animation: pulse 4s ease-in-out infinite;
         }
       `}</style>
     <section style={{
-      padding: 'clamp(4rem, 8vw, 8rem) 0',
+      padding: 'clamp(2rem, 4vw, 4rem) 0',
       position: 'relative',
-      background: 'linear-gradient(135deg, #fffef9 0%, #f8fafc 50%, #fffef9 100%)',
-      minHeight: '100vh',
+      background: '#e6ebf2',
       overflow: 'hidden'
     }}>
       {/* Background Pattern */}
@@ -71,7 +118,7 @@ const ContactSection: React.FC = () => {
       }}>
         <div style={{
           textAlign: 'center',
-          marginBottom: 'clamp(3rem, 6vw, 5rem)'
+          marginBottom: 'clamp(2rem, 3vw, 3rem)'
         }}>
           <div style={{
             display: 'inline-block',
@@ -79,7 +126,7 @@ const ContactSection: React.FC = () => {
             backgroundColor: 'rgba(46, 196, 241, 0.1)',
             borderRadius: '50px',
             border: '1px solid rgba(46, 196, 241, 0.2)',
-            marginBottom: '1.5rem'
+            marginBottom: '-2rem'
           }}>
             <span style={{
               fontSize: '0.875rem',
@@ -119,14 +166,14 @@ const ContactSection: React.FC = () => {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-          gap: 'clamp(3rem, 6vw, 6rem)',
+          gap: 'clamp(2rem, 4vw, 3rem)',
           maxWidth: '1300px',
           margin: '0 auto'
         }}>
           {/* Contact Form - Left Side */}
           <div style={{
             backgroundColor: '#ffffff',
-            padding: 'clamp(3rem, 5vw, 4rem)',
+            padding: 'clamp(2rem, 4vw, 2.5rem)',
             borderRadius: '24px',
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8)',
             border: '1px solid rgba(226, 232, 240, 0.8)',
@@ -148,7 +195,7 @@ const ContactSection: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              marginBottom: '2rem'
+              marginBottom: '1.5rem'
             }}>
               <div style={{
                 width: '3rem',
@@ -178,7 +225,7 @@ const ContactSection: React.FC = () => {
             <form onSubmit={handleSubmit} style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '2rem'
+              gap: '1.5rem'
             }}>
               <div style={{ position: 'relative' }}>
                 <label style={{
@@ -208,7 +255,8 @@ const ContactSection: React.FC = () => {
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                       outline: 'none',
                       backgroundColor: '#fafafa',
-                      fontWeight: '500'
+                      fontWeight: '500',
+                      color: '#1a202c'
                     }}
                     onFocus={(e) => {
                       e.target.style.borderColor = '#2ec4f1';
@@ -254,7 +302,8 @@ const ContactSection: React.FC = () => {
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                       outline: 'none',
                       backgroundColor: '#fafafa',
-                      fontWeight: '500'
+                      fontWeight: '500',
+                      color: '#1a202c'
                     }}
                     onFocus={(e) => {
                       e.target.style.borderColor = '#2ec4f1';
@@ -299,7 +348,8 @@ const ContactSection: React.FC = () => {
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                       outline: 'none',
                       backgroundColor: '#fafafa',
-                      fontWeight: '500'
+                      fontWeight: '500',
+                      color: '#1a202c'
                     }}
                     onFocus={(e) => {
                       e.target.style.borderColor = '#2ec4f1';
@@ -348,7 +398,8 @@ const ContactSection: React.FC = () => {
                       minHeight: '140px',
                       backgroundColor: '#fafafa',
                       fontWeight: '500',
-                      fontFamily: 'inherit'
+                      fontFamily: 'inherit',
+                      color: '#1a202c'
                     }}
                     onFocus={(e) => {
                       e.target.style.borderColor = '#2ec4f1';
@@ -366,39 +417,83 @@ const ContactSection: React.FC = () => {
                 </div>
               </div>
 
+              {/* Status Message */}
+              {submitStatus.type && (
+                <div style={{
+                  padding: '1rem 1.5rem',
+                  borderRadius: '12px',
+                  fontSize: '0.95rem',
+                  fontWeight: '600',
+                  textAlign: 'center',
+                  border: submitStatus.type === 'success' ? '2px solid #22c55e' : '2px solid #ef4444',
+                  backgroundColor: submitStatus.type === 'success' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                  color: submitStatus.type === 'success' ? '#16a34a' : '#dc2626'
+                }}>
+                  {submitStatus.message}
+                </div>
+              )}
+
               <button
                 type="submit"
+                disabled={isSubmitting}
                 style={{
-                  background: 'linear-gradient(135deg, #25D366 0%, #20c55a 100%)',
+                  background: isSubmitting 
+                    ? 'linear-gradient(135deg, #94a3b8 0%, #64748b 100%)'
+                    : 'linear-gradient(135deg, #25D366 0%, #20c55a 100%)',
                   color: 'white',
                   padding: '1rem 2.5rem',
                   border: 'none',
                   borderRadius: '12px',
                   fontSize: '1.1rem',
                   fontWeight: '600',
-                  cursor: 'pointer',
+                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
                   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   alignSelf: 'stretch',
-                  boxShadow: '0 10px 25px -5px rgba(37, 211, 102, 0.3)',
+                  boxShadow: isSubmitting 
+                    ? '0 10px 25px -5px rgba(148, 163, 184, 0.3)'
+                    : '0 10px 25px -5px rgba(37, 211, 102, 0.3)',
                   position: 'relative',
                   overflow: 'hidden',
-                  letterSpacing: '0.025em'
+                  letterSpacing: '0.025em',
+                  opacity: isSubmitting ? 0.7 : 1
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(37, 211, 102, 0.4)';
-                  e.currentTarget.style.background = 'linear-gradient(135deg, #20c55a 0%, #16a34a 100%)';
+                  if (!isSubmitting) {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(37, 211, 102, 0.4)';
+                    e.currentTarget.style.background = 'linear-gradient(135deg, #20c55a 0%, #16a34a 100%)';
+                  }
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(37, 211, 102, 0.3)';
-                  e.currentTarget.style.background = 'linear-gradient(135deg, #25D366 0%, #20c55a 100%)';
+                  if (!isSubmitting) {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(37, 211, 102, 0.3)';
+                    e.currentTarget.style.background = 'linear-gradient(135deg, #25D366 0%, #20c55a 100%)';
+                  }
                 }}
               >
-                Send Message
-                <svg style={{ marginLeft: '0.5rem', display: 'inline' }} width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                {isSubmitting ? (
+                  <>
+                    <svg style={{ marginRight: '0.5rem', display: 'inline', animation: 'spin 1s linear infinite' }} width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 4.75V6.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M17.127 6.873L16.061 7.939" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M19.25 12H17.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M17.127 17.127L16.061 16.061" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M12 19.25V17.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M6.873 17.127L7.939 16.061" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M4.75 12H6.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M6.873 6.873L7.939 7.939" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <svg style={{ marginLeft: '0.5rem', display: 'inline' }} width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </>
+                )}
               </button>
             </form>
           </div>
@@ -406,7 +501,7 @@ const ContactSection: React.FC = () => {
           {/* Contact Information - Right Side */}
           <div style={{
             backgroundColor: 'rgba(255, 255, 255, 0.8)',
-            padding: 'clamp(3rem, 5vw, 4rem)',
+            padding: 'clamp(2rem, 4vw, 2.5rem)',
             borderRadius: '24px',
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8)',
             border: '1px solid rgba(226, 232, 240, 0.8)',
@@ -414,6 +509,16 @@ const ContactSection: React.FC = () => {
             overflow: 'hidden',
             backdropFilter: 'blur(10px)'
           }}>
+            {/* Subtle gradient overlay */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '4px',
+              background: 'linear-gradient(90deg, #2ec4f1 0%, #25D366 100%)'
+            }} />
+            
             {/* Decorative elements */}
             <div style={{
               position: 'absolute',
@@ -430,7 +535,7 @@ const ContactSection: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              marginBottom: '3rem'
+              marginBottom: '2rem'
             }}>
               <div style={{
                 width: '3rem',
@@ -460,11 +565,11 @@ const ContactSection: React.FC = () => {
             <div style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '2rem'
+              gap: '1.5rem'
             }}>
               {/* Address */}
               <div style={{
-                padding: '2rem',
+                padding: '1.5rem',
                 backgroundColor: 'rgba(248, 250, 252, 0.8)',
                 borderRadius: '16px',
                 border: '1px solid rgba(226, 232, 240, 0.6)',
@@ -534,7 +639,7 @@ const ContactSection: React.FC = () => {
 
               {/* Phone */}
               <div style={{
-                padding: '2rem',
+                padding: '1.5rem',
                 backgroundColor: 'rgba(248, 250, 252, 0.8)',
                 borderRadius: '16px',
                 border: '1px solid rgba(226, 232, 240, 0.6)',
@@ -608,7 +713,7 @@ const ContactSection: React.FC = () => {
 
               {/* Email */}
               <div style={{
-                padding: '2rem',
+                padding: '1.5rem',
                 backgroundColor: 'rgba(248, 250, 252, 0.8)',
                 borderRadius: '16px',
                 border: '1px solid rgba(226, 232, 240, 0.6)',
@@ -683,7 +788,7 @@ const ContactSection: React.FC = () => {
 
               {/* Business Hours */}
               <div style={{
-                padding: '2rem',
+                padding: '1.5rem',
                 backgroundColor: 'rgba(248, 250, 252, 0.8)',
                 borderRadius: '16px',
                 border: '1px solid rgba(226, 232, 240, 0.6)',

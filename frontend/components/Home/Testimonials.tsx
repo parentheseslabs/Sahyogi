@@ -30,7 +30,12 @@ const sectionStyle: React.CSSProperties = {
 };
 
 const titleStyle: React.CSSProperties = {
-  ...standardSectionTitleStyle,
+  fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+  fontWeight: 700,
+  marginBottom: 'clamp(1rem, 2vw, 2rem)',
+  color: '#1a355e',
+  letterSpacing: '-0.025em',
+  textAlign: 'center',
 };
 
 const subtitleStyle: React.CSSProperties = {

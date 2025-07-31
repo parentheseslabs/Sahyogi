@@ -40,6 +40,7 @@ export const PRODUCT_SPOTLIGHT_QUERY = `*[_type == "productSpotlight"][0]{
 export const CORE_SERVICES_QUERY = `*[_type == "coreServicesOverview"][0]{
   cards[]-> {
     _id,
+    icon,
     title,
     benefit,
     link,
