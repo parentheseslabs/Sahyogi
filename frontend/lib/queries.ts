@@ -1,6 +1,7 @@
 export const HERO_QUERY = `*[_type == "hero"][0]{
   headingLine1,
   headingLine2,
+  tagline,
   subheading,
   primaryCtaText,
   primaryCtaLink,

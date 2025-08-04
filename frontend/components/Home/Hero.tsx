@@ -49,6 +49,24 @@ const heroTitleStyle: React.CSSProperties = {
   animation: 'fadeIn 1s ease-out',
 };
 
+const secondaryHeadingStyle: React.CSSProperties = {
+  fontSize: 'clamp(1.4rem, 3vw, 2.2rem)',
+  fontWeight: 600,
+  color: '#2ec4f2',
+  display: 'block',
+  marginTop: 'clamp(0.5rem, 1vw, 0.8rem)',
+};
+
+const taglineStyle: React.CSSProperties = {
+  fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
+  fontWeight: 600,
+  color: '#2ec4f2',
+  marginBottom: 'clamp(0.5rem, 1vw, 0.8rem)',
+  textTransform: 'uppercase',
+  letterSpacing: '0.05em',
+  animation: 'fadeIn 0.8s ease-out',
+};
+
 const subheadingStyle: React.CSSProperties = {
   fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
   color: '#64748b',
@@ -242,8 +260,12 @@ export default function Hero() {
         flexDirection: isMobile ? 'column' : 'row',
       }}>
         <div style={leftCol}>
+        {hero.tagline && (
+          <div style={taglineStyle}>{hero.tagline}</div>
+        )}
         <h1 style={heroTitleStyle}>
-          {hero.headingLine1}<br />{hero.headingLine2}
+          {hero.headingLine1}<br />
+          <span style={secondaryHeadingStyle}>{hero.headingLine2}</span>
         </h1>
         <p style={subheadingStyle}>{hero.subheading}</p>
         

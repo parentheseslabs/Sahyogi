@@ -14,6 +14,12 @@ export default {
       type: 'string',
     },
     {
+      name: 'tagline',
+      title: 'Tagline (e.g., "Through AI Automation")',
+      type: 'string',
+      description: 'Small tagline that appears above or below the main heading',
+    },
+    {
       name: 'subheading',
       title: 'Subheading',
       type: 'string',

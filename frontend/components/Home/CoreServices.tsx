@@ -14,19 +14,21 @@ function urlFor(source: any) {
 const sectionStyle: React.CSSProperties = {
   width: '100%',
   background: 'transparent',
-  padding: 'clamp(4rem, 6vw, 6rem) clamp(1rem, 3vw, 2rem)',
+  padding: 'clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  minHeight: '100vh',
+  maxHeight: '100vh',
+  height: '100vh',
   position: 'relative',
   overflow: 'hidden',
+  justifyContent: 'center',
 };
 
 const titleStyle: React.CSSProperties = {
-  fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+  fontSize: 'clamp(2.2rem, 4.5vw, 3.5rem)',
   fontWeight: 700,
-  marginBottom: 'clamp(3rem, 5vw, 4rem)',
+  marginBottom: 'clamp(1.5rem, 3vw, 2.5rem)',
   color: '#ffffff',
   letterSpacing: '-0.025em',
   textAlign: 'center',
@@ -36,10 +38,11 @@ const titleStyle: React.CSSProperties = {
 const gridStyle: React.CSSProperties = {
   display: 'grid',
   gridTemplateColumns: 'repeat(4, 1fr)',
-  gap: 'clamp(2rem, 3vw, 3rem)',
+  gap: 'clamp(1rem, 2vw, 1.5rem)',
   width: '100%',
   maxWidth: '1400px',
   margin: '0 auto',
+  flex: 1,
 };
 
 const cardStyle: React.CSSProperties = {
@@ -50,13 +53,13 @@ const cardStyle: React.CSSProperties = {
   borderWidth: '1px',
   borderStyle: 'solid',
   borderColor: 'rgba(255, 255, 255, 0.2)',
-  padding: 'clamp(2rem, 3vw, 2.5rem)',
+  padding: 'clamp(1.5rem, 2.5vw, 2rem)',
   transition: 'all 0.3s ease',
   cursor: 'pointer',
   textAlign: 'left',
   position: 'relative',
   overflow: 'hidden',
-  minHeight: 'clamp(280px, 30vw, 320px)',
+  minHeight: 'clamp(240px, 28vw, 280px)',
   display: 'flex',
   flexDirection: 'column',
 };

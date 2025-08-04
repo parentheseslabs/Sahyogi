@@ -34,6 +34,8 @@ const leftCol: React.CSSProperties = {
   justifyContent: 'center',
   gap: 'clamp(0.5rem, 1vw, 0.8rem)',
   paddingRight: '0',
+  paddingLeft: '0',
+  marginLeft: '0',
 };
 
 const headlineStyle: React.CSSProperties = {
@@ -43,6 +45,10 @@ const headlineStyle: React.CSSProperties = {
   letterSpacing: '-0.025em',
   textAlign: 'left',
   marginBottom: 'clamp(0.2rem, 0.5vw, 0.3rem)',
+  marginLeft: 0,
+  marginRight: 0,
+  marginTop: 0,
+  paddingLeft: 0,
   lineHeight: 1.2,
 };
 
@@ -53,6 +59,10 @@ const subheadingStyle: React.CSSProperties = {
   letterSpacing: '-0.02em',
   textAlign: 'left',
   marginBottom: 'clamp(0.3rem, 0.6vw, 0.5rem)',
+  marginLeft: 0,
+  marginRight: 0,
+  marginTop: 0,
+  paddingLeft: 0,
   lineHeight: 1.3,
 };
 
