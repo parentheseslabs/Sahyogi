@@ -33,7 +33,12 @@ export const PRODUCT_PAGE_QUERY = `*[_type == "productPage"][0]{
   },
   keyModules[]{
     title,
-    icon,
+    icon{
+      asset->{
+        _id,
+        url
+      }
+    },
     description,
     features[]
   },

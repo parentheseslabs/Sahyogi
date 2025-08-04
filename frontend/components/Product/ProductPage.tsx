@@ -56,7 +56,7 @@ const ProductPage: React.FC = () => {
     keyModules: [
       {
         title: "Chatbot Builder",
-        icon: "🤖",
+        icon: null,
         description: "Create intelligent conversational flows without coding",
         features: [
           "Visual flow builder",
@@ -66,7 +66,7 @@ const ProductPage: React.FC = () => {
       },
       {
         title: "Campaign Manager",
-        icon: "📢",
+        icon: null,
         description: "Manage and automate your marketing campaigns",
         features: [
           "WhatsApp Blasts",
@@ -76,7 +76,7 @@ const ProductPage: React.FC = () => {
       },
       {
         title: "Analytics Dashboard",
-        icon: "📊",
+        icon: null,
         description: "Track performance with real-time insights",
         features: [
           "Live metrics & heatmaps",
@@ -372,28 +372,33 @@ const ProductPage: React.FC = () => {
       <section style={{ padding: 'clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 2rem)', background: '#fffef9' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <h2 style={{ 
-            fontSize: '3rem',
+            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
             fontWeight: 700,
             color: '#1a355e',
             textAlign: 'center',
-            marginBottom: 'clamp(1rem, 2vw, 1.5rem)'
+            marginBottom: 'clamp(2rem, 4vw, 3rem)'
           }}>
-            Key Features:
+            Key Features
           </h2>
           <div style={{ 
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(280px, 90vw, 350px), 1fr))', 
-            gap: 'clamp(1.5rem, 3vw, 3rem)' 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(300px, 90vw, 350px), 1fr))', 
+            gap: 'clamp(2rem, 4vw, 3rem)',
+            alignItems: 'stretch'
           }}>
             {productData.keyModules?.map((module: any, index: number) => (
               <div key={index} style={{
                 background: '#ffffff',
                 borderRadius: 'clamp(16px, 3vw, 24px)',
-                padding: 'clamp(1.5rem, 3vw, 3rem)',
+                padding: 'clamp(2rem, 4vw, 2.5rem)',
                 boxShadow: '0 8px 32px 0 rgba(26, 53, 94, 0.08)',
                 border: '1px solid rgba(226, 232, 240, 0.5)',
                 transition: 'all 0.3s ease',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+                minHeight: '480px'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-8px)';
@@ -404,51 +409,87 @@ const ProductPage: React.FC = () => {
                 e.currentTarget.style.boxShadow = '0 8px 32px 0 rgba(26, 53, 94, 0.08)';
               }}
               >
-                <div style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', marginBottom: 'clamp(1rem, 2vw, 1.5rem)', textAlign: 'center' }}>
-                  {module.icon}
+                {/* Icon Section */}
+                <div style={{ 
+                  fontSize: 'clamp(2.5rem, 4vw, 4rem)', 
+                  marginBottom: 'clamp(1.5rem, 3vw, 2rem)', 
+                  textAlign: 'center',
+                  height: '80px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  {module.icon && module.icon.asset && module.icon.asset.url ? (
+                    <img 
+                      src={module.icon.asset.url} 
+                      alt={module.title} 
+                      style={{ 
+                        width: '60px', 
+                        height: '60px', 
+                        objectFit: 'contain'
+                      }}
+                    />
+                  ) : (
+                    '⚡'
+                  )}
                 </div>
+
+                {/* Title Section */}
                 <h3 style={{ 
-                  fontSize: 'clamp(1.3rem, 3vw, 2rem)', 
+                  fontSize: 'clamp(1.5rem, 3vw, 1.8rem)', 
                   fontWeight: 700, 
                   color: '#1a355e',
-                  marginBottom: 'clamp(0.5rem, 1vw, 1rem)',
-                  textAlign: 'center'
+                  marginBottom: 'clamp(1rem, 2vw, 1.5rem)',
+                  textAlign: 'center',
+                  height: '60px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  lineHeight: 1.2
                 }}>
                   {module.title}
                 </h3>
+
+                {/* Description Section */}
                 <p style={{ 
                   color: '#64748b', 
                   lineHeight: '1.6',
                   fontSize: 'clamp(1rem, 2vw, 1.1rem)',
-                  marginBottom: 'clamp(1rem, 2vw, 2rem)',
-                  textAlign: 'center'
+                  marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+                  textAlign: 'center',
+                  flexGrow: 1,
+                  display: 'flex',
+                  alignItems: 'flex-start'
                 }}>
                   {module.description}
                 </p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vw, 0.8rem)' }}>
+
+                {/* Features Section */}
+                <div style={{ 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  gap: 'clamp(0.8rem, 1.5vw, 1rem)',
+                  marginTop: 'auto'
+                }}>
                   {module.features?.map((feature: string, featureIndex: number) => (
                     <div key={featureIndex} style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 'clamp(0.5rem, 1vw, 0.8rem)'
+                      gap: 'clamp(0.8rem, 1.5vw, 1rem)',
+                      padding: '0.5rem 0'
                     }}>
                       <div style={{
-                        width: 'clamp(16px, 2vw, 20px)',
-                        height: 'clamp(16px, 2vw, 20px)',
-                        background: '#10b981',
-                        borderRadius: '2px',
-                        flexShrink: 0,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: 'clamp(10px, 1.5vw, 12px)',
-                        color: 'white',
-                        fontWeight: 'bold'
-                      }}>✓</div>
+                        width: 'clamp(8px, 1.5vw, 10px)',
+                        height: 'clamp(8px, 1.5vw, 10px)',
+                        background: '#1a355e',
+                        borderRadius: '50%',
+                        flexShrink: 0
+                      }}></div>
                       <span style={{ 
                         color: '#1a355e', 
                         fontWeight: 500,
-                        fontSize: 'clamp(0.9rem, 2vw, 1rem)'
+                        fontSize: 'clamp(0.95rem, 2vw, 1.05rem)',
+                        lineHeight: 1.4
                       }}>
                         {feature}
                       </span>

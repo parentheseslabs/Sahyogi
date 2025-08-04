@@ -121,6 +121,8 @@ export default defineType({
       type: 'array',
       of: [
         {
+          name: 'keyModule',
+          title: 'Key Module',
           type: 'object',
           fields: [
             {
@@ -131,7 +133,12 @@ export default defineType({
             {
               name: 'icon',
               title: 'Module Icon',
-              type: 'string'
+              type: 'image',
+              options: { 
+                hotspot: true,
+                accept: 'image/*'
+              },
+              description: 'Upload an icon for this module (SVG, PNG, or JPG recommended)'
             },
             {
               name: 'description',
@@ -144,39 +151,13 @@ export default defineType({
               type: 'array',
               of: [{ type: 'string' }]
             }
-          ]
-        }
-      ],
-      initialValue: [
-        {
-          title: 'Chatbot Builder',
-          icon: '🤖',
-          description: 'Create intelligent conversational flows without coding',
-          features: [
-            'Visual flow builder',
-            'Templates library',
-            'Conditional logic'
-          ]
-        },
-        {
-          title: 'Campaign Manager',
-          icon: '📢',
-          description: 'Manage and automate your marketing campaigns',
-          features: [
-            'WhatsApp Blasts',
-            'Drip Campaigns',
-            'Lead tags'
-          ]
-        },
-        {
-          title: 'Analytics Dashboard',
-          icon: '📊',
-          description: 'Track performance with real-time insights',
-          features: [
-            'Live metrics & heatmaps',
-            'Funnel tracking',
-            'Agent performance reports'
-          ]
+          ],
+          preview: {
+            select: {
+              title: 'title',
+              subtitle: 'description'
+            }
+          }
         }
       ]
     },

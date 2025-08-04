@@ -14,7 +14,7 @@ function urlFor(source: any) {
 const sectionStyle: React.CSSProperties = {
   width: '100%',
   background: 'linear-gradient(135deg, #1a355e 0%, #0f1e2e 100%)',
-  padding: 'clamp(2rem, 3vw, 2.5rem) 2rem',
+  padding: 'clamp(1.5rem, 2.5vw, 2rem) 2rem',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -22,11 +22,11 @@ const sectionStyle: React.CSSProperties = {
 };
 
 const containerStyle: React.CSSProperties = {
-  maxWidth: '1200px',
+  maxWidth: '1400px',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  gap: 'clamp(1.5rem, 2.5vw, 2rem)',
+  gap: 'clamp(1rem, 2vw, 1.5rem)',
   alignItems: 'center',
 };
 
@@ -38,7 +38,7 @@ const headerSectionStyle: React.CSSProperties = {
 const cardsGridStyle: React.CSSProperties = {
   display: 'grid',
   gridTemplateColumns: 'repeat(5, 1fr)',
-  gap: 'clamp(0.8rem, 1.5vw, 1.2rem)',
+  gap: 'clamp(1rem, 2vw, 1.5rem)',
   width: '100%',
   justifyItems: 'center',
 };
@@ -55,25 +55,25 @@ const cardStyle: React.CSSProperties = {
   transition: 'all 0.3s ease',
   position: 'relative',
   overflow: 'hidden',
-  minHeight: '200px',
+  minHeight: '180px',
   width: '100%',
-  maxWidth: '220px',
+  maxWidth: '260px',
 };
 
 const headingStyle: React.CSSProperties = {
-  fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+  fontSize: 'clamp(2.2rem, 4.5vw, 3.5rem)',
   fontWeight: 700,
   color: '#ffffff',
-  lineHeight: 1.2,
-  marginBottom: '1.5rem',
+  lineHeight: 1.1,
+  marginBottom: '1rem',
 };
 
 const subHeadingStyle: React.CSSProperties = {
   ...standardBodyTextStyle,
-  fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
+  fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
   color: '#a0a0a0',
-  lineHeight: 1.5,
-  marginBottom: '1rem',
+  lineHeight: 1.4,
+  marginBottom: '0.5rem',
 };
 
 const numberBadgeStyle: React.CSSProperties = {
@@ -159,7 +159,7 @@ export default function WhySahyogi() {
     gridTemplateColumns: isMobile 
       ? 'repeat(2, 1fr)'
       : 'repeat(5, 1fr)',
-    maxWidth: isMobile ? '400px' : '1200px',
+    maxWidth: isMobile ? '400px' : '1400px',
   });
 
   return (
