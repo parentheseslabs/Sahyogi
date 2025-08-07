@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { PRODUCT_SPOTLIGHT_QUERY } from '../../lib/queries';
 import { client } from '../../lib/sanity';
 import imageUrlBuilder from '@sanity/image-url';
-import { standardSectionTitleStyle, standardBodyTextStyle } from '../../styles/standardStyles';
 
 const builder = imageUrlBuilder(client);
 function urlFor(source: any) {
@@ -67,11 +66,12 @@ const subheadingStyle: React.CSSProperties = {
 };
 
 const copyStyle: React.CSSProperties = {
-  ...standardBodyTextStyle,
   fontWeight: 500,
   margin: 0,
   lineHeight: 1.7,
   maxWidth: '100%',
+  fontSize: 'clamp(1rem, 2.2vw, 1.1rem)',
+  color: '#64748b',
 };
 
 const carouselCol: React.CSSProperties = {
@@ -139,24 +139,6 @@ const slideContainer: React.CSSProperties = {
   height: '100%',
 };
 
-const titleStyle: React.CSSProperties = {
-  fontSize: '2.2rem',
-  fontWeight: 800,
-  marginBottom: '2.5rem',
-  color: '#3fc2ec',
-  letterSpacing: '1px',
-  textAlign: 'center',
-};
-
-const headingStyle: React.CSSProperties = {
-  fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-  fontWeight: 800,
-  color: '#1a355e',
-  letterSpacing: '-0.025em',
-  textAlign: 'center',
-  marginBottom: 'clamp(0.8rem, 2vw, 1.2rem)',
-};
-
 export default function ProductSpotlight() {
   const [data, setData] = useState<any>(null);
   const [current, setCurrent] = useState(0);
@@ -183,15 +165,6 @@ export default function ProductSpotlight() {
 
   const images = data?.carouselImages || [];
 
-  // Auto-slide effect
-  useEffect(() => {
-    if (images.length < 2) return;
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [images.length, current]);
-
   const nextSlide = () => {
     if (isAnimating) return;
     setIsAnimating(true);
@@ -209,6 +182,15 @@ export default function ProductSpotlight() {
       setIsAnimating(false);
     }, 300);
   };
+
+  // Auto-slide effect
+  useEffect(() => {
+    if (images.length < 2) return;
+    const interval = setInterval(() => {
+      setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   if (!data) return null;
 

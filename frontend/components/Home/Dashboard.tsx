@@ -159,8 +159,8 @@ const metricLabelStyle: React.CSSProperties = {
 };
 
 export default function Dashboard() {
-  const [activeChats, setActiveChats] = useState(2847);
-  const [revenue, setRevenue] = useState(1200000);
+  const activeChats = 2847;
+  const revenue = 1200000;
 
   useEffect(() => {
     // Add pulse animation keyframes

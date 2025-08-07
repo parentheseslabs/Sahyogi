@@ -172,7 +172,7 @@ export default function WhySahyogi() {
           </h2>
           <p style={subHeadingStyle}>
             From plug-and-play launch to agent handoffs and full funnel automation,<br />
-            we support every step of your SME's journey with zero technical headaches and pricing built for scale.
+            we support every step of your SME&apos;s journey with zero technical headaches and pricing built for scale.
           </p>
         </div>
         

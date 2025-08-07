@@ -1,11 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { HERO_QUERY } from '../../lib/queries';
 import { client } from '../../lib/sanity';
 import imageUrlBuilder from '@sanity/image-url';
-import { standardHeadingStyle, standardBodyTextStyle } from '../../styles/standardStyles';
 
 const builder = imageUrlBuilder(client);
 
@@ -194,7 +192,6 @@ const imageStyle: React.CSSProperties = {
 export default function Hero() {
   const [hero, setHero] = useState<any>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const checkMobile = () => {

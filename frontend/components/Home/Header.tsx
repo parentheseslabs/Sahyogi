@@ -336,7 +336,7 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      <style jsx>{`
+      <style>{`
         @media (max-width: 768px) {
           .desktop-nav {
             display: none !important;

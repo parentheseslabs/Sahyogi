@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 const servicesData = [
@@ -141,7 +143,7 @@ export default function ServicesPage() {
             marginBottom: '2rem',
             fontSize: '1.1rem'
           }}>
-            Let's discuss how our automation solutions can transform your business.
+            Let&apos;s discuss how our automation solutions can transform your business.
           </p>
           <Link
             href="/#contact"
@@ -172,9 +174,3 @@ export default function ServicesPage() {
     </main>
   );
 }
-
-export const metadata = {
-  title: 'Our Services - Sahyogi',
-  description: 'Transform your business with our comprehensive automation solutions. Customer support, business process automation, lead generation, and social media automation.',
-  keywords: ['automation services', 'business automation', 'customer support', 'lead generation', 'social media automation', 'process optimization']
-};

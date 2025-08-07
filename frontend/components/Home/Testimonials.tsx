@@ -297,7 +297,7 @@ export default function Testimonials() {
               onMouseLeave={() => setHoveredCard(null)}
             >
               <div style={quoteText}>
-                <div style={quoteIcon}>"</div>
+                <div style={quoteIcon}>&quot;</div>
                 {t.quote}
               </div>
               <div style={authorSection}>

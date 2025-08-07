@@ -69,7 +69,7 @@ const ContactSection: React.FC = () => {
 
   return (
     <>
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px) rotate(0deg); }
           50% { transform: translateY(-20px) rotate(2deg); }
@@ -148,7 +148,7 @@ const ContactSection: React.FC = () => {
             marginBottom: '1.5rem',
             lineHeight: '1.1'
           }}>
-            Let's Start a Conversation
+            Let&apos;s Start a Conversation
           </h2>
           <p style={{
             fontSize: 'clamp(1.1rem, 2.5vw, 1.25rem)',
@@ -158,7 +158,7 @@ const ContactSection: React.FC = () => {
             lineHeight: '1.6',
             fontWeight: '400'
           }}>
-            Ready to transform your business with AI? We're here to help you every step of the way.
+            Ready to transform your business with AI? We&apos;re here to help you every step of the way.
           </p>
         </div>
         
