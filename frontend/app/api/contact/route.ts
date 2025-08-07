@@ -16,7 +16,7 @@ const RECIPIENTS = [
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, phone, message } = body;
+    const { name, email, phone, message, recaptchaToken } = body;
 
     // Validate required fields
     if (!name || !email || !message) {
@@ -24,6 +24,34 @@ export async function POST(request: NextRequest) {
         { error: 'Name, email, and message are required' },
         { status: 400 }
       );
+    }
+
+    // Verify reCAPTCHA token (only if configured)
+    if (process.env.RECAPTCHA_SECRET_KEY) {
+      if (!recaptchaToken) {
+        return NextResponse.json(
+          { error: 'reCAPTCHA verification is required' },
+          { status: 400 }
+        );
+      }
+
+      // Verify reCAPTCHA with Google
+      const recaptchaResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
+      });
+
+      const recaptchaResult = await recaptchaResponse.json();
+
+      if (!recaptchaResult.success) {
+        return NextResponse.json(
+          { error: 'reCAPTCHA verification failed. Please try again.' },
+          { status: 400 }
+        );
+      }
     }
 
     // Create transporter with updated Gmail configuration

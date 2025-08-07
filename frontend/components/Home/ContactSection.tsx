@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +15,9 @@ const ContactSection: React.FC = () => {
     type: 'success' | 'error' | null;
     message: string;
   }>({ type: null, message: '' });
+  
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -23,10 +27,24 @@ const ContactSection: React.FC = () => {
     }));
   };
 
+  const handleRecaptchaChange = (token: string | null) => {
+    setRecaptchaToken(token);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: '' });
+
+    // Check if reCAPTCHA is completed (only if configured)
+    if (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && !recaptchaToken) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Please complete the reCAPTCHA verification.'
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch('/api/contact', {
@@ -34,7 +52,10 @@ const ContactSection: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          recaptchaToken
+        }),
       });
 
       const result = await response.json();
@@ -44,13 +65,17 @@ const ContactSection: React.FC = () => {
           type: 'success',
           message: 'Thank you! Your message has been sent successfully. We\'ll get back to you soon.'
         });
-        // Reset form
+        // Reset form and reCAPTCHA
         setFormData({
           name: '',
           email: '',
           phone: '',
           message: ''
         });
+        setRecaptchaToken(null);
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
+        }
       } else {
         setSubmitStatus({
           type: 'error',
@@ -416,6 +441,35 @@ const ContactSection: React.FC = () => {
                   />
                 </div>
               </div>
+
+              {/* reCAPTCHA */}
+              {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
+                <div style={{ 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  marginBottom: '1.5rem',
+                  marginTop: '1rem'
+                }}>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                    onChange={handleRecaptchaChange}
+                    theme="light"
+                  />
+                </div>
+              ) : (
+                <div style={{
+                  backgroundColor: '#fff3cd',
+                  border: '1px solid #ffeaa7',
+                  borderRadius: '8px',
+                  padding: '1rem',
+                  margin: '1rem 0',
+                  textAlign: 'center',
+                  color: '#856404'
+                }}>
+                  ⚠️ reCAPTCHA is not configured. Please set up your reCAPTCHA keys.
+                </div>
+              )}
 
               {/* Status Message */}
               {submitStatus.type && (
