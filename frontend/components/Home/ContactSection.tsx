@@ -744,7 +744,7 @@ const ContactSection: React.FC = () => {
                     }}>
                       Call Us
                     </h4>
-                    <a href="tel:+1234567890" style={{
+                    <a href="tel:+91 8697133050 " style={{
                       fontSize: '1.1rem',
                       color: '#2ec4f1',
                       textDecoration: 'none',
