@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import PolicyModal from '../Modal/PolicyModal';
+import Link from 'next/link';
 
 const footerOuter: React.CSSProperties = {
   width: '100%',
@@ -136,8 +136,6 @@ const socials = [
 export default function Footer() {
   const [hovered, setHovered] = React.useState<number | null>(null);
   const [socialHovered, setSocialHovered] = React.useState<number | null>(null);
-  const [privacyModalOpen, setPrivacyModalOpen] = React.useState(false);
-  const [termsModalOpen, setTermsModalOpen] = React.useState(false);
   const [policyHovered, setPolicyHovered] = React.useState<string | null>(null);
   
   return (
@@ -194,8 +192,8 @@ export default function Footer() {
       <div style={bottomBar}>
         <span>© 2025 Sahyogi.io. All rights reserved.</span>
         <div style={{ display: 'flex', gap: 'clamp(1rem, 3vw, 1.5rem)', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <button 
-            onClick={() => setPrivacyModalOpen(true)}
+          <Link 
+            href="/privacy-policy"
             style={{
               ...policyLinkStyle,
               color: policyHovered === 'privacy' ? '#1a355e' : '#718096'
@@ -204,9 +202,9 @@ export default function Footer() {
             onMouseLeave={() => setPolicyHovered(null)}
           >
             Privacy Policy
-          </button>
-          <button 
-            onClick={() => setTermsModalOpen(true)}
+          </Link>
+          <Link 
+            href="/terms-of-service"
             style={{
               ...policyLinkStyle,
               color: policyHovered === 'terms' ? '#1a355e' : '#718096'
@@ -215,21 +213,9 @@ export default function Footer() {
             onMouseLeave={() => setPolicyHovered(null)}
           >
             Terms of Service
-          </button>
+          </Link>
         </div>
       </div>
-
-      {/* Policy Modals */}
-      <PolicyModal 
-        type="privacy" 
-        isOpen={privacyModalOpen} 
-        onClose={() => setPrivacyModalOpen(false)} 
-      />
-      <PolicyModal 
-        type="terms" 
-        isOpen={termsModalOpen} 
-        onClose={() => setTermsModalOpen(false)} 
-      />
     </footer>
   );
 } 
